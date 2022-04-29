@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>抓包工具如何获取对方IP</title>
+      <link href="/blog/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%AF%B9%E6%96%B9IP/"/>
+      <url>/blog/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%AF%B9%E6%96%B9IP/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>怎么用Wireshark抓包QQ的到对方的IP地址</p><p>通过wireshark抓包工具得到对方的IP</p><p>一、wireshark<br>Wireshark（前称Ethereal）是一个网络封包分析软件。网络封包分析软件的功能是撷取网络封包，并尽可能显示出最为详细的网络封包资料。Wireshark使用WinPCAP作为接口，直接与网卡进行数据报文交换。<br>下载地址：<a href="https://www.wireshark.org/#download">https://www.wireshark.org/#download</a></p><p>二、使用步骤<br>1.打开wireshark选择自己的网卡<br>你需要抓那个机器的就选择那张网卡，我这里QQ在本机上我连接的宽带所以我选择以太网。</p><p>如下图（示例）：<br><img src="01.jpg" alt=""></p><p>2.双击进入以太网<br><img src="02.jpg" alt=""><br>这里我们会看到有很多数据传输，我们可以通过在应用显示过滤器选择自己需要的查找的内容去编辑表达式，网上有很多表达式可以搜索常见显示过滤表达式去学习。</p><p>该处使用的url网络请求的数据。</p><p>3.进入正题，如何抓取QQ好友的IP地址（拨打QQ电话不换对方接不接都可以得到）<br>在电脑上打开QQ，选择你想要得到IP地址的好友，拨通QQ电话（这里不管接不接通你都可以在wireshark中抓到他（她）的IP地址）<br><img src="03.jpg" alt=""><br>进入wireshark里按住CTRL+f，如下图进行配置<br><img src="04.jpg" alt=""><br>在字符串左边的框里输入020048（因为020048就是QQ UDP72字节的报文头）<br>在这里插入图片描述如上图这就是我与好友建立udp连接的数据包，通过字段判断所需对象的IP地址<br><img src="05.jpg" alt=""><br>还可以通过显示过滤器创建表达式-data.len == 72(表示数据长度在72个字节)<br><img src="06.jpg" alt=""><br>对比自己的IP判断出好友的IP地址</p><p>1、本网站名称：南宋辛弃疾<br>2、本站永久网址：nsxqj.top<br>3、本网站的文章部分内容可能来源于网络，仅供大家学习与参考，如有侵权，请联系站长进行删除处理。<br>4、本站一切资源不代表本站立场，并不代表本站赞同其观点和对其真实性负责。<br>5、本站一律禁止以任何方式发布或转载任何违法的相关信息，访客发现请向站长举报<br>6、南宋辛弃疾分享站发布的项目信息仅供参考和学习，不保证所有项目的真实性，谨防上当受骗！项目有风险，操作请谨慎！如遇风险项目请及时联系站长进行删除处理。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>教你学会如何DDOS攻击与防护</title>
       <link href="/blog/4%E6%AD%A5%E6%95%99%E4%BD%A0%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95DDOS%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4/"/>
       <url>/blog/4%E6%AD%A5%E6%95%99%E4%BD%A0%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95DDOS%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4/</url>
